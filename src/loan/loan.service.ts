@@ -18,7 +18,7 @@ export class LoanService {
   async create(createInvoiceDto: CreateLoanDto) {
     const createLoan = await this.loanRepository.save(createInvoiceDto);
     return {
-      invoice: createLoan,
+      loan: createLoan,
       message: 'loan successfully created',
     };
   }
@@ -33,17 +33,17 @@ export class LoanService {
 
   async update(id: string, updateLoanDto: UpdateLoanDto) {
     // const { ClientEmail } = updateInvoiceDto;
-    const invoice = await this.findOne(id);
-    if (!invoice) {
-      if (!invoice) throw new NotFoundException("loan don't exis");
+    const loan = await this.findOne(id);
+    if (!loan) {
+      if (!loan) throw new NotFoundException("loan don't exis");
     }
-    const updatedInvoice = await this.loanRepository.save({
-      ...invoice,
+    const updatedLoan = await this.loanRepository.save({
+      ...loan,
       ...updateLoanDto,
     });
     return {
       message: 'loan successfully updated',
-      updatedInvoice,
+      updatedLoan,
     };
   }
 
