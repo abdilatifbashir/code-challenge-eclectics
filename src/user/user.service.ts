@@ -55,9 +55,10 @@ export class UserService {
       throw new BadRequestException('Invalid credentials');
     }
     console.log(user,"here is the user")
+    console.log('generated tokens', await this.authService.generateJwt(user));
 
     const payload = {
-      token: this.authService.generateJwt(user),
+      token: await this.authService.generateJwt(user),
       message:"successully logged in"
     };
 

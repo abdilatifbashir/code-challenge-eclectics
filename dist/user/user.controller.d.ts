@@ -5,8 +5,11 @@ import { LoginUserInput } from "./dto/login-user.input";
 export declare class UserController {
     private readonly userService;
     constructor(userService: UserService);
-    create(createUserDto: CreateUserDto): unknown;
-    login(loginUserInput: LoginUserInput): unknown;
+    create(createUserDto: CreateUserDto): Promise<any>;
+    login(loginUserInput: LoginUserInput): Promise<{
+        token: string;
+        message: string;
+    }>;
     findAll(): string;
     findOne(id: string): Promise<import("./entities/user.entity").User>;
     update(id: string, updateUserDto: UpdateUserDto): string;
