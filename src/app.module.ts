@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { DatabaseConfig } from './config/database.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { LoanModule } from './loan/loan.module';
 import { LoanService } from './loan/loan.service';
@@ -8,22 +9,32 @@ import { Repository } from 'typeorm'
 import { UserModule } from './user/user.module';
 import { User } from './user/entities/user.entity';
 import { AuthModule } from './auth/auth.module'
+import { LoanRepayment } from './repayments/entities/LoanRepayment.entity';
+import { RepaymentsModule } from './repayments/repayments.module';
+require('dotenv').config();
+import * as dotenv from "dotenv"
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { config } from './config/config';
+
+
+
+dotenv.config()
+
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: '',
-      database: 'loans_db',
-      entities: [Loan,User],
-      synchronize: true,
+    ConfigModule.forRoot({
+      load: [config],
+      isGlobal: true,
+    }),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      useClass: DatabaseConfig,
     }),
     LoanModule,
     UserModule,
     AuthModule,
+    RepaymentsModule,
   ],
   controllers: [],
   providers: [],

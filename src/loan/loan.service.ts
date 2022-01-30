@@ -15,13 +15,26 @@ export class LoanService {
   constructor(
     @InjectRepository(Loan) private loanRepository: Repository<Loan>,
   ) {}
-  async create(createInvoiceDto: CreateLoanDto) {
-    const createLoan = await this.loanRepository.save(createInvoiceDto);
+  async create(createLoanDto: CreateLoanDto) {
+    const createLoan = await this.loanRepository.save({
+      ...createLoanDto,
+      isApproved: false,
+       isPaid:false,
+      createdAt: new Date().toISOString().toString(),
+    });
     return {
       loan: createLoan,
       message: 'loan successfully created',
     };
   }
+
+  // async repayLoan(data:any) {
+  //   const repay = await this.loanRepaymentRepository.save(data)
+  //   return {
+  //     repayment:repay,
+  //     message:"loan succesfully repaid"
+  //   }
+  // }
 
   async findAll(): Promise<Loan[]> {
     return await this.loanRepository.find();
@@ -49,7 +62,7 @@ export class LoanService {
 
   async remove(id: string) {
     try {
-      const loan= await this.findOne(id);
+      const loan = await this.findOne(id);
       if (!loan) {
         throw new BadRequestException("invoice don't exist");
       }

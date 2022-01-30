@@ -21,8 +21,8 @@ let LoanService = class LoanService {
     constructor(loanRepository) {
         this.loanRepository = loanRepository;
     }
-    async create(createInvoiceDto) {
-        const createLoan = await this.loanRepository.save(createInvoiceDto);
+    async create(createLoanDto) {
+        const createLoan = await this.loanRepository.save(Object.assign(Object.assign({}, createLoanDto), { isApproved: false, isPaid: false, createdAt: new Date().toISOString().toString() }));
         return {
             loan: createLoan,
             message: 'loan successfully created',

@@ -1,3 +1,4 @@
+import { RolesGuard } from './../auth/strategies/jwt-guard.auth';
 import {
   Controller,
   Get,
@@ -6,10 +7,14 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { LoanService } from './loan.service';
 import { CreateLoanDto } from './dto/create-loan.dto';
 import { UpdateLoanDto } from './dto/update-loan.dto';
+
+// import { AuthGuard } from '@nestjs/passport'
+
 
 @Controller('loans')
 export class LoanController {
@@ -20,6 +25,11 @@ export class LoanController {
     return this.loanService.create(createInvoiceDto);
   }
 
+  // @Post("repay")
+  // repayLoan(@Body() data:any){
+  //   return this.loanService.repayLoan(data)
+  // }
+@UseGuards(RolesGuard)
   @Get()
   findAll() {
     return this.loanService.findAll();

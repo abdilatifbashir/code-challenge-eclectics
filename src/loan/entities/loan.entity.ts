@@ -1,7 +1,8 @@
 // export class Invoice {}
 
-import { Entity, Column, PrimaryGeneratedColumn , OneToOne} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn , OneToOne,JoinColumn} from 'typeorm';
 import { User } from 'src/user/entities/user.entity';
+import { LoanRepayment } from 'src/repayments/entities/LoanRepayment.entity';
 
 @Entity()
 export class Loan {
@@ -14,11 +15,14 @@ export class Loan {
   @Column({ nullable: true })
   lastName: string;
 
-  @Column({ nullable: true })
+  @Column()
   emailAdress: string;
 
-  @Column({ nullable: true })
+  @Column()
   PhoneNumber: string;
+
+  @Column()
+  nationalId: string;
 
   @Column({ nullable: true })
   city: string;
@@ -32,6 +36,19 @@ export class Loan {
   @Column()
   streetAddres: string;
 
-  @OneToOne(() => User, (user) => user)
+  @Column({ nullable: true })
+  createdAt: string;
+
+  @Column({ nullable: true })
+  isApproved: boolean;
+
+  @OneToOne(() => User,user => user.loan)
+  @JoinColumn()
   user: User;
+
+  @OneToOne(() => LoanRepayment,repayment => repayment.loan)
+  @JoinColumn()
+  repayment :LoanRepayment
+
+  
 }

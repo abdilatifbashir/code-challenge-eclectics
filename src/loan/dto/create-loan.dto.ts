@@ -5,12 +5,13 @@ export class CreateLoanDto {
 
   emailAdress: string;
 
-  PhoneNumber: string;
+  phoneNumber: string;
 
   city: string;
 
   country: string;
 
-  AmountToBorrow: number;
-
+  amountToBorrow: number;
+  
+  nationalId: string;
 }

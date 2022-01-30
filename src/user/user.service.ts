@@ -73,24 +73,13 @@ export class UserService {
     return await this.userRepository.save({ ...user, ...updateUser });
   }
 
-  findAll() {
-    return `This action returns all user`;
-  }
+  // findAll() {
+  //   return `This action returns all user`;
+  // }
 
   async findOne(email: any): Promise<User> {
     const user = await this.userRepository.findOne({ where: { email } });
     return user;
-  }
-
-  async findOneByID(email: string): Promise<User> {
-    return this.userRepository.findOne({ email });
-  }
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} user`;
   }
 
   async hashPassward(password: string, salt: string): Promise<string> {

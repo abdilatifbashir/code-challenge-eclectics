@@ -12,6 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 const typeorm_1 = require("typeorm");
 const bcrypt = require("bcrypt");
+const LoanRepayment_entity_1 = require("../../repayments/entities/LoanRepayment.entity");
+const loan_entity_1 = require("../../loan/entities/loan.entity");
 let User = class User {
     async validatePassword(password) {
         const hash = await bcrypt.hash(password, this.salt);
@@ -50,6 +52,15 @@ __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
 ], User.prototype, "salt", void 0);
+__decorate([
+    (0, typeorm_1.OneToOne)(() => loan_entity_1.Loan, loan => loan.user, { onDelete: "CASCADE" }),
+    (0, typeorm_1.JoinColumn)(),
+    __metadata("design:type", loan_entity_1.Loan)
+], User.prototype, "loan", void 0);
+__decorate([
+    (0, typeorm_1.OneToOne)(() => LoanRepayment_entity_1.LoanRepayment, repayment => repayment.user),
+    __metadata("design:type", LoanRepayment_entity_1.LoanRepayment)
+], User.prototype, "repayment", void 0);
 User = __decorate([
     (0, typeorm_1.Entity)()
 ], User);

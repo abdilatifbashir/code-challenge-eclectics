@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Loan = void 0;
 const typeorm_1 = require("typeorm");
 const user_entity_1 = require("../../user/entities/user.entity");
+const LoanRepayment_entity_1 = require("../../repayments/entities/LoanRepayment.entity");
 let Loan = class Loan {
 };
 __decorate([
@@ -27,13 +28,17 @@ __decorate([
     __metadata("design:type", String)
 ], Loan.prototype, "lastName", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
+    (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Loan.prototype, "emailAdress", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
+    (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Loan.prototype, "PhoneNumber", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", String)
+], Loan.prototype, "nationalId", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
@@ -51,9 +56,23 @@ __decorate([
     __metadata("design:type", String)
 ], Loan.prototype, "streetAddres", void 0);
 __decorate([
-    (0, typeorm_1.OneToOne)(() => user_entity_1.User, (user) => user),
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], Loan.prototype, "createdAt", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", Boolean)
+], Loan.prototype, "isApproved", void 0);
+__decorate([
+    (0, typeorm_1.OneToOne)(() => user_entity_1.User, user => user.loan),
+    (0, typeorm_1.JoinColumn)(),
     __metadata("design:type", user_entity_1.User)
 ], Loan.prototype, "user", void 0);
+__decorate([
+    (0, typeorm_1.OneToOne)(() => LoanRepayment_entity_1.LoanRepayment, repayment => repayment.loan),
+    (0, typeorm_1.JoinColumn)(),
+    __metadata("design:type", LoanRepayment_entity_1.LoanRepayment)
+], Loan.prototype, "repayment", void 0);
 Loan = __decorate([
     (0, typeorm_1.Entity)()
 ], Loan);

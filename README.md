@@ -41,6 +41,8 @@ $ npm run start
 # watch mode
 $ npm run start:dev
 
+# Check env.template file I added to setup DB and application secrets in your .env file
+
 # production mode
 $ npm run start:prod
 ```

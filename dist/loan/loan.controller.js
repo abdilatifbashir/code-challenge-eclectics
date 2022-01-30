@@ -13,6 +13,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LoanController = void 0;
+const jwt_guard_auth_1 = require("./../auth/strategies/jwt-guard.auth");
 const common_1 = require("@nestjs/common");
 const loan_service_1 = require("./loan.service");
 const create_loan_dto_1 = require("./dto/create-loan.dto");
@@ -45,6 +46,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], LoanController.prototype, "create", null);
 __decorate([
+    (0, common_1.UseGuards)(jwt_guard_auth_1.RolesGuard),
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
