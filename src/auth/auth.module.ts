@@ -9,7 +9,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../user/entities/user.entity';
 import { JwtStrategy } from './strategies/jwt.strategy';
 
-import { RolesGuard} from "./strategies/jwt-guard.auth"
+// import { AuthGuard } from './strategies/jwt-guard.auth';
 
 
 @Module({

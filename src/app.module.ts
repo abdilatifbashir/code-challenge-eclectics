@@ -1,3 +1,4 @@
+
 import { Module } from '@nestjs/common';
 import { DatabaseConfig } from './config/database.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -9,13 +10,10 @@ import { Repository } from 'typeorm'
 import { UserModule } from './user/user.module';
 import { User } from './user/entities/user.entity';
 import { AuthModule } from './auth/auth.module'
-import { LoanRepayment } from './repayments/entities/LoanRepayment.entity';
-import { RepaymentsModule } from './repayments/repayments.module';
 require('dotenv').config();
 import * as dotenv from "dotenv"
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { config } from './config/config';
-
 
 
 dotenv.config()
@@ -34,7 +32,6 @@ dotenv.config()
     LoanModule,
     UserModule,
     AuthModule,
-    RepaymentsModule,
   ],
   controllers: [],
   providers: [],

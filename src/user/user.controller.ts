@@ -17,10 +17,10 @@ export class UserController {
     return await this.userService.login(loginUserInput);
   }
 
-  // @Get()
-  // findAll() {
-  //   return this.userService.findAll();
-  // }
+  @Get()
+  findAll() {
+    return this.userService.findAll();
+  }
 
   
 }

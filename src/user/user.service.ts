@@ -73,9 +73,10 @@ export class UserService {
     return await this.userRepository.save({ ...user, ...updateUser });
   }
 
-  // findAll() {
-  //   return `This action returns all user`;
-  // }
+  async findAll() {
+    const users = await this.userRepository.find()
+    return users;
+  }
 
   async findOne(email: any): Promise<User> {
     const user = await this.userRepository.findOne({ where: { email } });

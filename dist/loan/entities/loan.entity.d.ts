@@ -1,18 +1,12 @@
 import { User } from 'src/user/entities/user.entity';
-import { LoanRepayment } from 'src/repayments/entities/LoanRepayment.entity';
+import { LoanIssuance } from './loanIssuance.entity';
+import { LoanStatus } from "../dto/loan-status";
 export declare class Loan {
-    id: string;
-    firstName: string;
-    lastName: string;
-    emailAdress: string;
-    PhoneNumber: string;
-    nationalId: string;
-    city: string;
-    country: string;
-    AmountTBorrow: number;
-    streetAddres: string;
+    loanId: string;
+    amountToBorrow: number;
     createdAt: string;
-    isApproved: boolean;
-    user: User;
-    repayment: LoanRepayment;
+    updateddAt: string;
+    status: LoanStatus;
+    userId: User;
+    issued: LoanIssuance;
 }

@@ -12,11 +12,12 @@ const loan_service_1 = require("./loan.service");
 const loan_controller_1 = require("./loan.controller");
 const typeorm_1 = require("@nestjs/typeorm");
 const loan_entity_1 = require("./entities/loan.entity");
+const loanIssuance_entity_1 = require("./entities/loanIssuance.entity");
 let LoanModule = class LoanModule {
 };
 LoanModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([loan_entity_1.Loan])],
+        imports: [typeorm_1.TypeOrmModule.forFeature([loan_entity_1.Loan, loanIssuance_entity_1.LoanIssuance])],
         controllers: [loan_controller_1.LoanController],
         providers: [loan_service_1.LoanService]
     })

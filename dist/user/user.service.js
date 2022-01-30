@@ -63,21 +63,13 @@ let UserService = class UserService {
             throw new common_1.NotFoundException('User not found');
         return await this.userRepository.save(Object.assign(Object.assign({}, user), updateUser));
     }
-    findAll() {
-        return `This action returns all user`;
+    async findAll() {
+        const users = await this.userRepository.find();
+        return users;
     }
     async findOne(email) {
         const user = await this.userRepository.findOne({ where: { email } });
         return user;
-    }
-    async findOneByID(email) {
-        return this.userRepository.findOne({ email });
-    }
-    update(id, updateUserDto) {
-        return `This action updates a #${id} user`;
-    }
-    remove(id) {
-        return `This action removes a #${id} user`;
     }
     async hashPassward(password, salt) {
         return await bcrypt.hash(password, salt);

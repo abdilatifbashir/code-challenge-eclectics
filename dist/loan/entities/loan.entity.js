@@ -12,67 +12,40 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Loan = void 0;
 const typeorm_1 = require("typeorm");
 const user_entity_1 = require("../../user/entities/user.entity");
-const LoanRepayment_entity_1 = require("../../repayments/entities/LoanRepayment.entity");
+const loanIssuance_entity_1 = require("./loanIssuance.entity");
+const loan_status_1 = require("../dto/loan-status");
 let Loan = class Loan {
 };
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)({ type: 'bigint' }),
     __metadata("design:type", String)
-], Loan.prototype, "id", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
-    __metadata("design:type", String)
-], Loan.prototype, "firstName", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
-    __metadata("design:type", String)
-], Loan.prototype, "lastName", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Loan.prototype, "emailAdress", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Loan.prototype, "PhoneNumber", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Loan.prototype, "nationalId", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
-    __metadata("design:type", String)
-], Loan.prototype, "city", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
-    __metadata("design:type", String)
-], Loan.prototype, "country", void 0);
+], Loan.prototype, "loanId", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", Number)
-], Loan.prototype, "AmountTBorrow", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Loan.prototype, "streetAddres", void 0);
+], Loan.prototype, "amountToBorrow", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
     __metadata("design:type", String)
 ], Loan.prototype, "createdAt", void 0);
 __decorate([
     (0, typeorm_1.Column)({ nullable: true }),
-    __metadata("design:type", Boolean)
-], Loan.prototype, "isApproved", void 0);
+    __metadata("design:type", String)
+], Loan.prototype, "updateddAt", void 0);
 __decorate([
-    (0, typeorm_1.OneToOne)(() => user_entity_1.User, user => user.loan),
+    (0, typeorm_1.Column)({ nullable: true }),
+    __metadata("design:type", String)
+], Loan.prototype, "status", void 0);
+__decorate([
+    (0, typeorm_1.OneToOne)(() => user_entity_1.User),
     (0, typeorm_1.JoinColumn)(),
     __metadata("design:type", user_entity_1.User)
-], Loan.prototype, "user", void 0);
+], Loan.prototype, "userId", void 0);
 __decorate([
-    (0, typeorm_1.OneToOne)(() => LoanRepayment_entity_1.LoanRepayment, repayment => repayment.loan),
+    (0, typeorm_1.OneToOne)(() => loanIssuance_entity_1.LoanIssuance, (loanIssuance) => loanIssuance.loan),
     (0, typeorm_1.JoinColumn)(),
-    __metadata("design:type", LoanRepayment_entity_1.LoanRepayment)
-], Loan.prototype, "repayment", void 0);
+    __metadata("design:type", loanIssuance_entity_1.LoanIssuance)
+], Loan.prototype, "issued", void 0);
 Loan = __decorate([
     (0, typeorm_1.Entity)()
 ], Loan);

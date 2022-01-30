@@ -1,17 +1,6 @@
+import { LoanStatus } from "./loan-status";
 export class CreateLoanDto {
-  firstName: string;
-
-  lastName: string;
-
-  emailAdress: string;
-
-  phoneNumber: string;
-
-  city: string;
-
-  country: string;
-
+  userId: string;
   amountToBorrow: number;
-  
-  nationalId: string;
+  status: LoanStatus;
 }

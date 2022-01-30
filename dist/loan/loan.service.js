@@ -21,8 +21,8 @@ let LoanService = class LoanService {
     constructor(loanRepository) {
         this.loanRepository = loanRepository;
     }
-    async create(createLoanDto) {
-        const createLoan = await this.loanRepository.save(Object.assign(Object.assign({}, createLoanDto), { isApproved: false, isPaid: false, createdAt: new Date().toISOString().toString() }));
+    async create(userId, createLoanDto) {
+        const createLoan = await this.loanRepository.save(Object.assign(Object.assign({}, createLoanDto), { userId: userId, createdAt: new Date().toISOString().toString(), updateddAt: new Date().toISOString().toString() }));
         return {
             loan: createLoan,
             message: 'loan successfully created',
@@ -33,18 +33,6 @@ let LoanService = class LoanService {
     }
     async findOne(id) {
         return await this.loanRepository.findOne(id);
-    }
-    async update(id, updateLoanDto) {
-        const loan = await this.findOne(id);
-        if (!loan) {
-            if (!loan)
-                throw new common_1.NotFoundException("loan don't exis");
-        }
-        const updatedLoan = await this.loanRepository.save(Object.assign(Object.assign({}, loan), updateLoanDto));
-        return {
-            message: 'loan successfully updated',
-            updatedLoan,
-        };
     }
     async remove(id) {
         try {

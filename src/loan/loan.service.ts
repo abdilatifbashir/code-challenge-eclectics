@@ -15,12 +15,12 @@ export class LoanService {
   constructor(
     @InjectRepository(Loan) private loanRepository: Repository<Loan>,
   ) {}
-  async create(createLoanDto: CreateLoanDto) {
+  async create(userId,createLoanDto: CreateLoanDto) {
     const createLoan = await this.loanRepository.save({
       ...createLoanDto,
-      isApproved: false,
-       isPaid:false,
+      userId:userId,
       createdAt: new Date().toISOString().toString(),
+      updateddAt:new Date().toISOString().toString()
     });
     return {
       loan: createLoan,
@@ -44,21 +44,21 @@ export class LoanService {
     return await this.loanRepository.findOne(id);
   }
 
-  async update(id: string, updateLoanDto: UpdateLoanDto) {
-    // const { ClientEmail } = updateInvoiceDto;
-    const loan = await this.findOne(id);
-    if (!loan) {
-      if (!loan) throw new NotFoundException("loan don't exis");
-    }
-    const updatedLoan = await this.loanRepository.save({
-      ...loan,
-      ...updateLoanDto,
-    });
-    return {
-      message: 'loan successfully updated',
-      updatedLoan,
-    };
-  }
+  // async update(id: string, updateLoanDto: UpdateLoanDto) {
+  //   // const { ClientEmail } = updateInvoiceDto;
+  //   const loan = await this.findOne(id);
+  //   if (!loan) {
+  //     if (!loan) throw new NotFoundException("loan don't exis");
+  //   }
+  //   const updatedLoan = await this.loanRepository.save({
+  //     ...loan,
+  //     ...updateLoanDto,
+  //   });
+  //   return {
+  //     message: 'loan successfully updated',
+  //     updatedLoan,
+  //   };
+  // }
 
   async remove(id: string) {
     try {

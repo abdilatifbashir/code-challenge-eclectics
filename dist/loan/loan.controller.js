@@ -13,17 +13,15 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LoanController = void 0;
-const jwt_guard_auth_1 = require("./../auth/strategies/jwt-guard.auth");
 const common_1 = require("@nestjs/common");
 const loan_service_1 = require("./loan.service");
 const create_loan_dto_1 = require("./dto/create-loan.dto");
-const update_loan_dto_1 = require("./dto/update-loan.dto");
 let LoanController = class LoanController {
     constructor(loanService) {
         this.loanService = loanService;
     }
-    create(createInvoiceDto) {
-        return this.loanService.create(createInvoiceDto);
+    async create(id, createInvoiceDto) {
+        return await this.loanService.create(createInvoiceDto, id);
     }
     findAll() {
         return this.loanService.findAll();
@@ -31,22 +29,19 @@ let LoanController = class LoanController {
     findOne(id) {
         return this.loanService.findOne(id);
     }
-    update(id, updateInvoiceDto) {
-        return this.loanService.update(id, updateInvoiceDto);
-    }
     remove(id) {
         return this.loanService.remove(id);
     }
 };
 __decorate([
-    (0, common_1.Post)("apply"),
-    __param(0, (0, common_1.Body)()),
+    (0, common_1.Post)('apply/:id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [create_loan_dto_1.CreateLoanDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:paramtypes", [Object, create_loan_dto_1.CreateLoanDto]),
+    __metadata("design:returntype", Promise)
 ], LoanController.prototype, "create", null);
 __decorate([
-    (0, common_1.UseGuards)(jwt_guard_auth_1.RolesGuard),
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
@@ -59,14 +54,6 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], LoanController.prototype, "findOne", null);
-__decorate([
-    (0, common_1.Patch)(':id'),
-    __param(0, (0, common_1.Param)('id')),
-    __param(1, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, update_loan_dto_1.UpdateLoanDto]),
-    __metadata("design:returntype", void 0)
-], LoanController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
     __param(0, (0, common_1.Param)('id')),

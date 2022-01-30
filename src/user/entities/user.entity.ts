@@ -1,9 +1,9 @@
 
 import { Entity, Column, PrimaryGeneratedColumn,OneToOne,JoinColumn} from 'typeorm';
 import * as bcrypt from 'bcrypt';
-import { LoanRepayment } from 'src/repayments/entities/LoanRepayment.entity';
-
+// import {  Loan} from 'src/loan/entities/loan.entity';
 import { Loan } from 'src/loan/entities/loan.entity';
+import { LoanIssuance } from 'src/loan/entities/loanIssuance.entity';
 @Entity()
 export class User {
   @PrimaryGeneratedColumn({ type: 'bigint' })
@@ -21,6 +21,9 @@ export class User {
   @Column({ nullable: true, unique: true })
   phoneNumber: string;
 
+  @Column({ nullable: true })
+  city: string;
+
   @Column({ nullable: false })
   password: string;
 
@@ -35,10 +38,13 @@ export class User {
     return hash == this.password;
   }
 
-  @OneToOne(() => Loan,loan => loan.user,{onDelete:"CASCADE"})
-  @JoinColumn()
-  loan: Loan;
+  // @OneToOne(() => Loan, (loan) => loan.user, { onDelete: 'CASCADE' })
+  // @JoinColumn()
+  // loan: Loan;
 
-  @OneToOne(() => LoanRepayment,repayment => repayment.user)
-  repayment:LoanRepayment
+  // @OneToOne(() => LoanRepayment, (repayment) => repayment.user)
+  // repayment: LoanRepayment;
+
+  @OneToOne(() => LoanIssuance, (loanIssuance) => loanIssuance.user)
+  issued: LoanIssuance;
 }

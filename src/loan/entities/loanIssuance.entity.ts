@@ -1,4 +1,4 @@
-
+import { Loan } from 'src/loan/entities/loan.entity';
 // export class Invoice {}
 
 import {
@@ -9,30 +9,35 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { User } from 'src/user/entities/user.entity';
-import { LoanIssuance } from './loanIssuance.entity';
-import {LoanStatus} from "../dto/loan-status"
+
 @Entity()
-export class Loan {
+export class LoanIssuance {
   @PrimaryGeneratedColumn({ type: 'bigint' })
-  loanId: string;
+  loanIssuanceId: string;
 
   @Column({ nullable: true })
-  amountToBorrow: number;
+  firstName: string;
 
   @Column({ nullable: true })
-  createdAt: string;
+  lastName: string;
+
+  @Column()
+  emailAdress: string;
+
+  @Column()
+  PhoneNumber: string;
+
+  @Column()
+  nationalId: string;
 
   @Column({ nullable: true })
-  updateddAt: string;
-
-  @Column({ nullable: true })
-  status: LoanStatus;
+  AmountIssued: number;
 
   @OneToOne(() => User)
   @JoinColumn()
-  userId: User;
+  user: User;
 
-  @OneToOne(() => LoanIssuance, (loanIssuance) => loanIssuance.loan)
+  @OneToOne(() => LoanIssuance, (loanIssuance) => loanIssuance)
   @JoinColumn()
-  issued: LoanIssuance;
+  loan: Loan;
 }

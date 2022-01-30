@@ -13,7 +13,6 @@ const typeorm_1 = require("@nestjs/typeorm");
 const loan_module_1 = require("./loan/loan.module");
 const user_module_1 = require("./user/user.module");
 const auth_module_1 = require("./auth/auth.module");
-const repayments_module_1 = require("./repayments/repayments.module");
 require('dotenv').config();
 const dotenv = require("dotenv");
 const config_1 = require("@nestjs/config");
@@ -35,7 +34,6 @@ AppModule = __decorate([
             loan_module_1.LoanModule,
             user_module_1.UserModule,
             auth_module_1.AuthModule,
-            repayments_module_1.RepaymentsModule,
         ],
         controllers: [],
         providers: [],

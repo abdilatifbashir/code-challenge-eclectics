@@ -1,7 +1,7 @@
 import { Auth } from 'src/auth/entities/auth.entity';
 import { User } from '../user/entities/user.entity';
 import { Loan } from 'src/loan/entities/loan.entity';
-import { LoanRepayment } from 'src/repayments/entities/LoanRepayment.entity';
+import { LoanIssuance } from 'src/loan/entities/loanIssuance.entity';
 
 
 export const config = () => ({
@@ -20,7 +20,8 @@ export const config = () => ({
       User,
       Auth,
       Loan,
-      LoanRepayment
+    
+      LoanIssuance
     
     ],
   },

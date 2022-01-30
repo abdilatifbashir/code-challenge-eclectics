@@ -1,4 +1,5 @@
-import { RolesGuard } from './../auth/strategies/jwt-guard.auth';
+// import { RolesGuard } from './../auth/strategies/jwt-guard.auth';
+import { AuthGuard } from '@nestjs/passport';
 import {
   Controller,
   Get,
@@ -20,16 +21,16 @@ import { UpdateLoanDto } from './dto/update-loan.dto';
 export class LoanController {
   constructor(private readonly loanService: LoanService) {}
 
-  @Post("apply")
-  create(@Body() createInvoiceDto: CreateLoanDto) {
-    return this.loanService.create(createInvoiceDto);
+  @Post('apply/:id', )
+  async create( @Param('id') id:any, @Body() createInvoiceDto: CreateLoanDto) {
+    return await this.loanService.create(createInvoiceDto,id);
   }
 
   // @Post("repay")
   // repayLoan(@Body() data:any){
   //   return this.loanService.repayLoan(data)
   // }
-@UseGuards(RolesGuard)
+  // @UseGuards(AuthGuard)
   @Get()
   findAll() {
     return this.loanService.findAll();
@@ -40,10 +41,10 @@ export class LoanController {
     return this.loanService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateInvoiceDto: UpdateLoanDto) {
-    return this.loanService.update(id, updateInvoiceDto);
-  }
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() updateInvoiceDto: UpdateLoanDto) {
+  //   return this.loanService.update(id, updateInvoiceDto);
+  // }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
